@@ -1,0 +1,17 @@
+= LocomotiveSearch
+
+== Usage
+
+Install and configure locomotivecms.
+
+Then in your Gemfile add:
+
+  gem 'locomotivecms-search'
+  
+In your locomotive.rb initializer configure your search engine:
+
+  config.search_engine = :mongoid # or elasticsearch
+
+You can now edit your model fields and mark them as searchable.
+
+This project rocks and uses MIT-LICENSE.
