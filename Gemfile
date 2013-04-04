@@ -5,7 +5,6 @@ source "http://rubygems.org"
 # development dependencies will be added by default to the :development group.
 gemspec
 
-gem 'locomotive_cms', path: '../engine'
 gem 'sass-rails'
 gem 'compass-rails'
 gem "jquery-rails"
