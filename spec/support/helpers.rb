@@ -1,7 +1,5 @@
-require 'spec_helper'
-
-feature "Search" do
-  before do
+module SpecHelpers
+  def setup_search
     @site = create('test site')
     @ctype = build(:content_type, site: @site, name: "Examples")
     @ctype.entries_custom_fields.create!(label: "Name", type: "string", searchable: true)
@@ -20,7 +18,7 @@ feature "Search" do
        {% endfor %}
        </ul>
     EOT
-    
+
     @index = @site.pages.where(slug: "index").first
     @index.raw_template = %|
        <form action="/{{ locale }}/search" method="GET">
@@ -31,22 +29,10 @@ feature "Search" do
     @index.save!
     @another_site = create('another site')
     create(:page, site: @another_site, title: "This should never show up in the search, even if it would be findable", slug: "rickroll", raw_template: "Rickroll")
-  end
-  
-  scenario "on a single site" do
-    visit 'http://test.example.com'
-    fill_in "Search", with: "findable"
-    click_on "Search"
-    page.should have_content "Please search for this"
-    page.should have_content "Findable entry"
-    page.should_not have_content "Hidden"
-    page.should_not have_content "This should never show up"
-    click_on "Please search for this"
-    page.should have_content "This is what you were looking for"
-    
-    visit 'http://test.example.com'
-    fill_in "Search", with: "not found"
-    click_on "Search"
-    page.should_not have_content "Page not found"
+    @ctype = build(:content_type, site: @another_site, name: "Examples")
+    @ctype.entries_custom_fields.create!(label: "Name", type: "string", searchable: true)
+    @ctype.entries.create!(name: "NOT Findable entry", stuff: "Some stuff")
   end
 end
+
+Rspec.configure { |c| c.include SpecHelpers }

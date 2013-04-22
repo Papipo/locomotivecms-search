@@ -9,7 +9,7 @@ require 'database_cleaner'
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 require Locomotive::Engine.root.join('spec', 'support', 'factories')
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+Dir[Locomotive::Search::Engine.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
   # ## Mock Framework
@@ -34,10 +34,30 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   
   config.before(:each) do
-    DatabaseCleaner.start
+    Mongoid.master.collections.select { |c| c.name != 'system.indexes' }.each(&:drop)
   end
-
+  
   config.after(:each) do
-    DatabaseCleaner.clean
+    Mongoid.master.collections.select { |c| c.name != 'system.indexes' }.each(&:drop)
+  end
+end
+
+shared_examples "a search backend" do
+  it "that works" do
+    visit 'http://test.example.com'
+    fill_in "Search", with: "findable"
+    click_on "Search"
+    page.should have_content "Please search for this"
+    page.should have_content "Findable entry"
+    page.should_not have_content "Hidden"
+    page.should_not have_content "This should never show up"
+    page.should_not have_content "NOT Findable entry"
+    click_on "Please search for this"
+    page.should have_content "This is what you were looking for"
+
+    visit 'http://test.example.com'
+    fill_in "Search", with: "not found"
+    click_on "Search"
+    page.should_not have_content "Page not found"
   end
 end
