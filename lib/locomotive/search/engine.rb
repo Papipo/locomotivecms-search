@@ -4,7 +4,7 @@ module Locomotive::Search
   def self.const_missing(const)
     if const.to_s == "Extension"
       require "activesearch/#{Locomotive.config.search_engine}"
-      const_set(const, ::ActiveSearch.const_get(Locomotive.config.search_engine.to_s.classify))
+      const_set(const, ::ActiveSearch.const_get(Locomotive.config.search_engine.to_s.camelize))
     end
   end
   
