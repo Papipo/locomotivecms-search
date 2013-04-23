@@ -65,5 +65,5 @@ Locomotive.configure do |config|
   # config.rack_cache = false
   #
   # Note: by default, rack/cache is disabled in the Heroku platform
-  config.search_engine = :mongoid
+  Locomotive.config.search_engine = SEARCH_ENGINE
 end

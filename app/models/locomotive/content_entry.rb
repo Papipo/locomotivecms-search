@@ -13,4 +13,12 @@ Locomotive::ContentEntry.class_eval do
   def content_type_slug
     content_type.slug
   end
+  
+  def indexable_id
+    if respond_to?(:site_id)
+      "site_#{site_id}_#{content_type_slug}_#{id}"
+    else
+      "#{content_type_slug}_#{id}"
+    end
+  end
 end
