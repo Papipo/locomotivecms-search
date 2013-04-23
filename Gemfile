@@ -5,8 +5,8 @@ source "http://rubygems.org"
 # development dependencies will be added by default to the :development group.
 gemspec
 
-gem 'locomotive_cms', github: 'locomotivecms/engine'
-gem 'activesearch', github: 'Papipo/activesearch'
+# gem 'locomotive_cms', github: 'locomotivecms/engine'
+# gem 'activesearch', github: 'Papipo/activesearch'
 gem 'sass-rails'
 gem 'compass-rails'
 gem "jquery-rails"
