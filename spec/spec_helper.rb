@@ -61,4 +61,18 @@ shared_examples "a search backend" do
     click_on "Search"
     page.should_not have_content "Page not found"
   end
+  
+  it "that is able to index modified content types" do
+    @ctype.entries_custom_fields.last.searchable = true
+    @ctype.save
+    visit 'http://test.example.com'
+    fill_in "Search", with: "stuff"
+    click_on "Search"
+    page.should_not have_content "Findable entry"
+    Locomotive::Search::ContentTypeReindexer.new.perform(@ctype.id)
+    visit 'http://test.example.com'
+    fill_in "Search", with: "stuff"
+    click_on "Search"
+    page.should have_content "Findable entry"
+  end
 end

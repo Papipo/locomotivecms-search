@@ -3,7 +3,7 @@ module SpecHelpers
     @site = create('test site')
     @ctype = build(:content_type, site: @site, name: "Examples")
     @ctype.entries_custom_fields.create!(label: "Name", type: "string", searchable: true)
-    @ctype.entries_custom_fields.create!(label: "Stuff", type: "text", searchable: false)
+    @stuff_field = @ctype.entries_custom_fields.create!(label: "Stuff", type: "text", searchable: false)
     @ctype.entries.create!(name: "Findable entry", stuff: "Some stuff")
     @ctype.entries.create!(name: "Hidden", stuff: "Not findable")
     create(:sub_page, site: @site, title: "Please search for this findable page", slug: "findable", raw_template: "This is what you were looking for")
@@ -27,11 +27,11 @@ module SpecHelpers
          <input type="submit" value="Search">
        </form>|
     @index.save!
-    @another_site = create('another site')
-    create(:page, site: @another_site, title: "This should never show up in the search, even if it would be findable", slug: "rickroll", raw_template: "Rickroll")
-    @ctype = build(:content_type, site: @another_site, name: "Examples")
-    @ctype.entries_custom_fields.create!(label: "Name", type: "string", searchable: true)
-    @ctype.entries.create!(name: "NOT Findable entry", stuff: "Some stuff")
+    another_site = create('another site')
+    create(:page, site: another_site, title: "This should never show up in the search, even if it would be findable", slug: "rickroll", raw_template: "Rickroll")
+    ctype = build(:content_type, site: another_site, name: "Examples")
+    ctype.entries_custom_fields.create!(label: "Name", type: "string", searchable: true)
+    ctype.entries.create!(name: "NOT Findable entry", stuff: "Some stuff")
   end
 end
 
