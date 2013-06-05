@@ -35,11 +35,11 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   
   config.before(:each) do
-    Mongoid.master.collections.select { |c| c.name != 'system.indexes' }.each(&:drop)
+    Mongoid.purge!
   end
   
   config.after(:each) do
-    Mongoid.master.collections.select { |c| c.name != 'system.indexes' }.each(&:drop)
+    Mongoid.purge!
   end
 end
 
