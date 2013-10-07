@@ -6,6 +6,8 @@ require 'rspec/autorun'
 require 'factory_girl'
 require 'database_cleaner'
 require 'activesearch'
+require 'capybara-webkit'
+require 'capybara-screenshot'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -42,6 +44,10 @@ RSpec.configure do |config|
     Mongoid.purge!
   end
 end
+
+Capybara.javascript_driver = :webkit
+Capybara.server_port = 7171
+Capybara.app_host = "http://test.example.com:7171"
 
 shared_examples "a search backend" do
   it "that works" do

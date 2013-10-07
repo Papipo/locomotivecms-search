@@ -25,4 +25,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "database_cleaner"
   s.add_development_dependency "launchy"
   s.add_development_dependency "parallel_tests"
+  s.add_development_dependency "capybara-screenshot"
 end
