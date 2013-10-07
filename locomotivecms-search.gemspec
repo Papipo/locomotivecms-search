@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Content search for LocomotiveCMS"
   s.description = "LocomotiveSearch is an engine which integrates ActiveSearch into LocomotiveCMS."
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "locomotive_cms", ">= 2.1"
