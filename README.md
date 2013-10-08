@@ -4,13 +4,11 @@
 
 Open your _Gemfile_ and add locomotive-cms search to it:
 
-    gem 'locomotivecms-search', require: false
-
-Run `bundle install`, then edit config/initializers/locomotive.rb and add this line:
-
-    require 'locomotive/search/mongoid
+    gem 'locomotivecms-search', require: 'locomotive/search/mongoid'
 
 Check out the Activesearch gem to know which backends are available and how to configure them.
+
+Run `bundle install`
 
 ## Adding the search results page
 
