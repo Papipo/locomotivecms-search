@@ -1,3 +1,1 @@
-require "locomotive/search/concerns/custom_fields/field"
-require "locomotive/search/concerns/locomotive/liquid/drops/site"
-require "locomotive/search/concerns/activesearch/proxy"
+Dir[Locomotive::Search::Engine.root.join("lib/locomotive/search/concerns/**/*.rb")].each {|f| require f}

@@ -9,7 +9,9 @@ require "sprockets/railtie"
 require "rails/test_unit/railtie"
 
 Bundler.require(*Rails.groups)
-require "locomotive/search"
+
+search_engine = SEARCH_ENGINE || 'mongoid'
+require "locomotive/search/#{search_engine}"
 
 module Dummy
   class Application < Rails::Application
