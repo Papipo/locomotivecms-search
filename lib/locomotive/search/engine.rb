@@ -1,6 +1,6 @@
-module Locomotive::Search  
+module Locomotive::Search
   class Engine < ::Rails::Engine
-    initializer "locomotive.search.concerns" do
+    initializer "locomotive.search.concerns", before: "locomotive.content_types" do
       require "locomotive/search/content_type_reindexer"
       require "locomotive/search/concerns"
 
