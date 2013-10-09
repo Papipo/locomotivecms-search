@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    locomotivecms-search (0.2.1)
+    locomotivecms-search (0.2.2)
       activesearch (~> 0.1)
       locomotive_cms (>= 2.1)
 
@@ -81,7 +81,7 @@ GEM
       sass (~> 3.1)
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
-    custom_fields (2.2.0)
+    custom_fields (2.2.3)
       activesupport (~> 3.2.13)
       carrierwave-mongoid (~> 0.6.0)
       money (~> 5.0)
