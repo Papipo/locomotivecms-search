@@ -33,13 +33,13 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
-  
+
   config.include FactoryGirl::Syntax::Methods
-  
+
   config.before(:each) do
     Mongoid.purge!
   end
-  
+
   config.after(:each) do
     Mongoid.purge!
   end
@@ -54,7 +54,7 @@ shared_examples "a search backend" do
     visit 'http://test.example.com'
     fill_in "Search", with: "findable"
     click_on "Search"
-    page.should have_content "Please search for this"
+    page.should have_content "Please search for this findable page"
     page.should have_content "Findable entry"
     page.should_not have_content "Hidden"
     page.should_not have_content "This should never show up"
@@ -67,7 +67,7 @@ shared_examples "a search backend" do
     click_on "Search"
     page.should_not have_content "Page not found"
   end
-  
+
   it "that is able to index modified content types" do
     @ctype.entries_custom_fields.last.searchable = true
     @ctype.save

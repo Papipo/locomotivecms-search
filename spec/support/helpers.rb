@@ -9,17 +9,20 @@ module SpecHelpers
     @ctype.entries.create!(name: "Findable entry", stuff: "Some stuff")
     @ctype.entries.create!(name: "Hidden", stuff: "Not findable")
     create(:sub_page, site: @site, title: "Please search for this findable page", slug: "findable", raw_template: "This is what you were looking for")
-    create(:sub_page, site: @site, title: "search", slug: "search", raw_template: <<-EOT)
-       <ul>
-       {% for result in site.search %}
-         {% if result.content_type_slug == 'examples' %}
-           <li><a href="/examples/{{result._slug}}">{{ result.name }}</a></li>
-         {% else %}
-           <li><a href="/{{result.slug}}">{{ result.title }}</a></li>
-         {% endif %}
-       {% endfor %}
-       </ul>
+    create(:sub_page, site: @site, title: "search", slug: "search", raw_template: <<-EOT
+      * Search results:
+      <ul>
+        {% for result in site.search %}
+          <li>{{ result }}</li>
+          {% if result.content_type_slug == 'examples' %}
+            <li><a href="/examples/{{result._slug}}">{{ result.name }}</a></li>
+          {% else %}
+            <li><a href="/{{result.slug}}">{{ result.title }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
     EOT
+    )
 
     @index = @site.pages.where(slug: "index").first
     @index.raw_template = %|
