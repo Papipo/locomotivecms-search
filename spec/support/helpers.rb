@@ -13,11 +13,10 @@ module SpecHelpers
       * Search results:
       <ul>
         {% for result in site.search %}
-          <li>{{ result }}</li>
           {% if result.content_type_slug == 'examples' %}
             <li><a href="/examples/{{result._slug}}">{{ result.name }}</a></li>
           {% else %}
-            <li><a href="/{{result.slug}}">{{ result.title }}</a></li>
+            <li><a href="/{{result.fullpath}}">{{ result.title }}</a></li>
           {% endif %}
         {% endfor %}
       </ul>

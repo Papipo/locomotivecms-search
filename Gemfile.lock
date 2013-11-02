@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    locomotivecms-search (0.2.5)
+    locomotivecms-search (0.2.6)
       activesearch (>= 0.1.3)
       locomotive_cms (>= 2.3)
 
