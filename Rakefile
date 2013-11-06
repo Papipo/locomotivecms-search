@@ -1,4 +1,6 @@
 #!/usr/bin/env rake
+require 'rspec/core/rake_task'
+
 begin
   require 'bundler/setup'
 rescue LoadError
@@ -22,14 +24,14 @@ end
 
 Bundler::GemHelper.install_tasks
 
-require 'rake/testtask'
-
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = false
+Dir["spec/features/*_spec.rb"].each do |spec_file|
+  name = File.basename(spec_file).gsub('_spec.rb', '')
+  desc "Run #{name} specs"
+  RSpec::Core::RakeTask.new("spec:#{name}") do |t|
+    t.pattern = spec_file
+  end
 end
 
-
-task :default => :test
+desc "Run specs"
+task spec: Rake.application.tasks.select { |t| t.name.start_with?("spec:") }
+task :default => :spec
