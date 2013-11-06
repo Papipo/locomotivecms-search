@@ -5,6 +5,7 @@ module Locomotive::Search
       require "locomotive/search/concerns"
 
       Locomotive::PartialsCell.add_template(:custom_fields_form, "searchable")
+      Locomotive::PartialsCell.add_template(:page_form, "searchable")
     end
   end
 end

@@ -8,7 +8,9 @@ module SpecHelpers
     @stuff_field.save!
     @ctype.entries.create!(name: "Findable entry", stuff: "Some stuff")
     @ctype.entries.create!(name: "Hidden", stuff: "Not findable")
-    create(:sub_page, site: @site, title: "Please search for this findable page", slug: "findable", raw_template: "This is what you were looking for")
+    create(:sub_page, site: @site, title: "Please search for this findable page", slug: "findable", raw_template: "This is what you were looking for", searchable: true)
+    create(:sub_page, site: @site, title: "Unpublished findable", slug: "unpublished-findable", raw_template: "Not published, so can't be found", searchable: true, published: false)
+    create(:sub_page, site: @site, title: "Seems findable", slug: "seems-findable", raw_template: "Even if it seems findable, it sound't be found because of the searchable flag", searchable: false)
     create(:sub_page, site: @site, title: "search", slug: "search", raw_template: <<-EOT
       * Search results:
       <ul>

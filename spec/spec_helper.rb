@@ -56,6 +56,8 @@ shared_examples "a search backend" do
     click_on "Search"
     page.should have_content "Please search for this findable page"
     page.should have_content "Findable entry"
+    page.should_not have_content "Unpublished findable"
+    page.should_not have_content "Seems findable"
     page.should_not have_content "Hidden"
     page.should_not have_content "This should never show up"
     page.should_not have_content "NOT Findable entry"

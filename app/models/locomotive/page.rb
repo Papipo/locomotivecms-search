@@ -3,7 +3,8 @@ require_dependency Locomotive::Engine.root.join('app', 'models', 'locomotive', '
 Locomotive::Page.class_eval do
   include Locomotive::Search::Extension
 
-  search_by [:title, :searchable_content, store: [:title, :site_id, :fullpath]], unless: :not_found?
+  field :searchable, type: Boolean, default: false
+  search_by [:title, :searchable_content, store: [:title, :site_id, :fullpath]], if: :is_searchable?
 
   def indexable_id
     if respond_to?(:site_id)
@@ -11,6 +12,10 @@ Locomotive::Page.class_eval do
     else
       "page_#{id}"
     end
+  end
+  
+  def is_searchable?
+    !not_found? && searchable && published
   end
 
   def searchable_content

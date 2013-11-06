@@ -10,7 +10,7 @@ require "rails/test_unit/railtie"
 
 Bundler.require(*Rails.groups)
 
-search_engine = SEARCH_ENGINE || 'mongoid'
+search_engine = defined?(SEARCH_ENGINE) ? SEARCH_ENGINE : 'mongoid'
 require "locomotive/search/#{search_engine}"
 
 module Dummy
