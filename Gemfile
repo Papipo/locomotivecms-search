@@ -1,5 +1,9 @@
 source "http://rubygems.org"
 
+# Local version of gems
+# gem 'locomotive_cms', path: '/Users/didier/Documents/LocomotiveCMS/engine'
+# gem 'activesearch', path: '/Users/didier/Documents/LocomotiveCMS/gems/activesearch'
+
 # Declare your gem's dependencies in locomotive-search.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.

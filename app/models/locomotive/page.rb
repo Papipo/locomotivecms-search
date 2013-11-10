@@ -1,10 +1,16 @@
 require_dependency Locomotive::Engine.root.join('app', 'models', 'locomotive', 'page').to_s
 
 Locomotive::Page.class_eval do
+
   include Locomotive::Search::Extension
 
-  field :searchable, type: Boolean, default: false
+  ## fields ##
+  field :searchable, type: Boolean, default: true
+
+  ## behaviours ##
   search_by [:title, :searchable_content, store: [:title, :site_id, :fullpath]], if: :is_searchable?
+
+  ## methods
 
   def indexable_id
     if respond_to?(:site_id)
@@ -13,41 +19,38 @@ Locomotive::Page.class_eval do
       "page_#{id}"
     end
   end
-  
+
   def is_searchable?
-    !not_found? && searchable && published
+    !not_found? && searchable? && published?
   end
 
   def searchable_content
     [].tap do |content|
-      self.serialized_template_translations.values.each do |template|
-        _content = ActiveSearch.strip_tags(raw_template)
-
-        liquid_raw = _content.match /\{\%\s*raw\s*\%\}.*\{\%\s*endraw\s*\%\}/m
-
-        _content.gsub!(/\n{2,}/, "\n")
-        _content.gsub!(/\{[\%\{][^\}]*[\%\}]\}/, '')
-
-        _content << liquid_raw.to_s
-
-        content << _content
-      end
-
+      # 1. add the editable elements
       self.editable_elements.each do |element|
-        next unless element.is_a?(Locomotive::EditableText)
-
-        content << ActiveSearch.strip_tags(element.attributes['content'])
+        # we don't want to include fixed editable elements of children.
+        next if !element.is_a?(Locomotive::EditableText) || (element.fixed? && element.from_parent?)
+        content << element.content
       end
-    end.join('+')
-  end
 
-  protected
+      # 2. add the raw template
 
-  def to_indexable
-    # Hack for the Algolia implementation since searchable_content is not considered as Mongoid field.
-    super.tap do |doc|
-      doc['content'] = self.searchable_content
-    end
+      # get a simple version of the template. not need to apply the "layout"
+      # for instance.
+      # then, render this template
+      template = self.raw_template.sub(/\{\%\s*extends [^%]*\s*\%\}/, '')
+
+      # modify the context instance so that the exceptions which might raise
+      # won't be displayed in the rendered output.
+      context = ::Liquid::Context.new({}, {}, { site: site, page: self }, false)
+
+      context.instance_eval do
+        def handle_error(e); '' end
+      end
+
+      # render the page
+      content << ::Liquid::Template.parse(template, {}).render(context)
+    end.join("\n")
   end
 
 end
