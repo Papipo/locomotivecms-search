@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/Papipo/locomotivecms-search"
   s.summary     = "Content search for LocomotiveCMS"
   s.description = "LocomotiveSearch is an engine which integrates ActiveSearch into LocomotiveCMS."
+  s.license     = 'MIT'
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]
