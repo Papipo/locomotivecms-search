@@ -6,8 +6,12 @@ Locomotive::ContentEntry.class_eval do
   search_by :options_for_search
   
   def options_for_search
-    store = [:_slug, _label_field_name, :site_id, :content_type_slug]
+    store = [:_slug, _label_field_name, :site_id, :content_type_slug, :content_entry_slug]
     content_type.entries_custom_fields.where(searchable: true).map(&:name) << {store: store}
+  end
+  
+  def content_entry_slug
+    _slug
   end
   
   def content_type_slug
