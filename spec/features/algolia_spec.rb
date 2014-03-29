@@ -3,12 +3,11 @@ require 'spec_helper'
 
 describe "Algolia" do
   before do
-    config = YAML.load_file(Rails.root.join('config', 'backends.yml'))
-    require "activesearch/algolia/client"
-    ActiveSearch::Algolia::Client.configure(config["algolia"]["api_key"], config["algolia"]["app_id"], "locomotivecms-search_dev")
-    ActiveSearch::Algolia::Client.new.delete_index
+    setup_search_engine
     setup_search
   end
-  
+
   it_behaves_like "a search backend"
+
+  include_examples "search from the back-office"
 end

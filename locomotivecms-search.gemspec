@@ -7,18 +7,18 @@ require "locomotive/search/version"
 Gem::Specification.new do |s|
   s.name        = "locomotivecms-search"
   s.version     = Locomotive::Search::VERSION
-  s.authors     = ["Rodrigo Alvarez"]
-  s.email       = ["papipo@gmail.com"]
+  s.authors     = ["Rodrigo Alvarez", "Didier Lafforgue"]
+  s.email       = ["papipo@gmail.com", "didier.lafforgue@gmail.com"]
   s.homepage    = "https://github.com/Papipo/locomotivecms-search"
   s.summary     = "Content search for LocomotiveCMS"
   s.description = "LocomotiveSearch is an engine which integrates ActiveSearch into LocomotiveCMS."
   s.license     = 'MIT'
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib}/**/*", "vendor"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency "locomotive_cms", ">= 2.3"
-  s.add_dependency "activesearch", "~> 0.2.0"
+  # s.add_dependency "locomotive_cms", ">= 2.5"
+  s.add_dependency "activesearch", "~> 0.3.0"
 
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "capybara-webkit"

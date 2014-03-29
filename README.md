@@ -35,6 +35,24 @@ Just add this code:
 The important part is the action parameter, since __it must point to the slug of your search results page__.
 Also, the name of the search input must be "search".
 
+## Search from the back-office
+
+From the 0.3.0 version, this gem includes a search bar for your LocomotiveCMS back-office. This search bar uses the [typeahead](http://twitter.github.io/typeahead.js/) javascript plugin.
+
+The only requirement is to have the **LocomotiveCMS 2.5.x** version installed.
+
+In your **LocomotiveCMS main application** (the one embedding LocomotiveCMS), you need to add 2 files (or edit them if they already exist).
+
+In the *app/views/locomotive/shared/_main_app_head.html.haml* file, add these 2 lines:
+
+    = javascript_include_tag  'locomotive/search_bar'
+    = stylesheet_link_tag     'locomotive/search_bar'
+
+In the *app/views/locomotive/shared/_main_app_header.html.haml* file, add this line:
+
+      = render 'locomotive/shared/search_bar'
+
+
 ## Note for mongoid 2.x users
 
 If you are using the mongoid engine and still on 2.x, you must use locomotivecms-search version ~> 0.0.5

@@ -1,4 +1,17 @@
 module SpecHelpers
+
+  def setup_search_engine
+    case SEARCH_ENGINE.to_sym
+    when :mongoid
+      ActiveSearch::Mongoid::Index.create_indexes
+    when :algolia
+      config = YAML.load_file(Rails.root.join('config', 'backends.yml'))
+      require "activesearch/algolia/client"
+      ActiveSearch::Algolia::Client.configure(config["algolia"]["api_key"], config["algolia"]["app_id"], "locomotivecms-search_dev")
+      ActiveSearch::Algolia::Client.new.delete_index
+    end
+  end
+
   def setup_search
     @site = create('test site')
     @ctype = build(:content_type, site: @site, name: "Examples")
@@ -39,6 +52,23 @@ module SpecHelpers
     ctype.entries_custom_fields.build(label: "Name", type: "string", searchable: true)
     ctype.save!
     ctype.entries.create!(name: "NOT Findable entry", stuff: "Some stuff")
+  end
+
+  def fill_typeahead(field, value, suggestion)
+    # make sure the search bar is present
+    page.evaluate_script(%Q{ $('#{field}').size() }).should == 1
+
+    # open the search bar and look for a string
+    page.execute_script %Q{ $('#{field} .twitter-typeahead').click() }
+    page.execute_script %Q{ $('#{field} input[name=keywords]').typeahead('val', "#{value}").focus().keydown() }
+    page.execute_script %Q{ $('#{field} input[name=keywords]').typeahead('val', "#{value} ").focus().keydown() }
+    # FIXME: bad stuff
+    sleep SEARCH_ENGINE.to_sym == :algolia ? 1.5 : 0.5
+
+    # DEBUG
+    # Capybara::Screenshot.screenshot_and_open_image
+
+    page.evaluate_script(%Q{ $('.tt-suggestion:contains("#{suggestion}")').size() }).should >= 1
   end
 end
 

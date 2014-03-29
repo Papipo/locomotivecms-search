@@ -1,0 +1,20 @@
+#search-bar
+  %form{ action: main_app.locomotive_search_path(:json) }
+    %input{ type: 'text', name: 'keywords', placeholder: 'Search for keywords within pages and content entries' }
+
+%script{ type: 'text/html', id: 'no_search_entries_found' }
+  .empty-message= t('.no_entries_found')
+
+%script{ type: 'text/html', id: 'search_entry' }
+  .search-entry
+    .inner
+      .type {{search_type}}
+      {{#with_locale}}
+      .locale
+        = flag_tag '{{locale}}'
+      {{/with_locale}}
+      .locale
+      %h5= link_to '{{label}}', '{{url}}'
+      .highlight {{{content}}}
+      .clear
+

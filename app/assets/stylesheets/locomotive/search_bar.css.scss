@@ -1,0 +1,168 @@
+@import "locomotive/shared/helpers";
+@import "compass/css3";
+@import "compass/css3/border-radius";
+
+@mixin input-placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &:-ms-input-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}
+
+#search-bar {
+  position: absolute;
+  top: 20px;
+  right: 5px;
+
+  .empty-message {
+    min-height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: #8b8d9a;
+    font-size: 13px;
+  }
+
+  .twitter-typeahead {
+    background: rgba(138, 140, 150, 0.3);
+    @include border-radius(25px);
+    border: 4px solid rgba(0, 0, 10, 0.5);
+    outline: none;
+    width: 31px;
+    line-height: 25px;
+    height: 31px;
+    padding: 0px;
+    margin: 0px;
+
+    @include transition-property(width);
+    @include transition-duration(0.1s);
+    @include transition-timing-function(ease-in);
+
+    input[type=text] {
+      display: inline-block;
+      width: 100%;
+      background: transparent !important;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      line-height: 25px;
+
+      color: transparent;
+      @include input-placeholder {
+        color: transparent;
+      }
+    }
+
+    &.on {
+      width: 340px;
+      padding: 0px 10px 0px 28px;
+
+      input[type=text] {
+        color: #fff;
+        cursor: inherit;
+        @include input-placeholder {
+          color: rgba(255, 255, 255, 0.2);
+        }
+      }
+
+      input.tt-hint {
+        margin-left: 28px;
+      }
+    }
+
+    &.opened {
+      border-bottom: 0px;
+      @include border-bottom-radius(0px);
+    }
+  }
+
+  .tt-dropdown-menu {
+    z-index: 1100 !important;
+    background: white;
+    @include box-shadow(rgba(0, 0, 0, 0.5) 0px 0px 8px 0px);
+    width: 100%;
+    left: -4px !important;
+
+    background: rgba(255, 255, 255, 0.95);
+    @include border-bottom-radius(25px);
+    border: 4px solid #1c1c24;
+    border-top: 0px;
+
+    .search-entry {
+      border-top: 1px solid #eee;
+      padding: 5px;
+
+      h5 {
+        @include locomotive-link;
+        margin: 0 0 5px 0;
+        line-height: 20px;
+      }
+
+      .type {
+        float: right;
+        @include label;
+      }
+
+      .locale {
+        float: right;
+        position: relative;
+        top: -2px;
+        margin-right: 2px;
+      }
+
+      .highlight {
+        background: transparent;
+        color: #999;
+        margin: 0px;
+        padding: 0px;
+
+        strong, em {
+          color: #333;
+          font-weight: bold;
+        }
+      }
+
+      &:last-child {
+        min-height: 60px;
+      }
+    }
+
+    .tt-suggestion.tt-cursor {
+      background: #1F82BC;
+
+      .search-entry {
+        border-top-color: transparent;
+
+        h5 a {
+          color: #fff;
+        }
+
+        .highlight {
+          color: #ccc;
+
+          strong, em {
+            color: #111;
+          }
+        }
+      }
+
+      &:last-child {
+        @include border-bottom-radius(19px);
+      }
+    }
+  }
+
+  form {
+    position: relative;
+
+    &:before {
+      position: absolute;
+      top: 7px;
+      left: 12px;
+      font-family: FontAwesome;
+      content: "\f002";
+      color: rgba(9, 10, 15, 0.7);
+      font-size: 20px;
+    }
+  }
+}

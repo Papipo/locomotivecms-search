@@ -8,9 +8,17 @@ Locomotive::Page.class_eval do
   field :searchable, type: Boolean, default: true
 
   ## behaviours ##
-  search_by [:title, :searchable_content, store: [:title, :site_id, :fullpath]], if: :is_searchable?
+  search_by [:title, :searchable_content, store: [:search_type, :label, :site_id, :fullpath]], if: :is_searchable?
 
   ## methods
+
+  def search_type
+    'page'
+  end
+
+  def label
+    self.title
+  end
 
   def indexable_id
     if respond_to?(:site_id)
@@ -26,14 +34,14 @@ Locomotive::Page.class_eval do
 
   def searchable_content
     [].tap do |content|
-      # 1. add the editable elements
-      self.editable_elements.each do |element|
-        # we don't want to include fixed editable elements of children.
-        next if !element.is_a?(Locomotive::EditableText) || (element.fixed? && element.from_parent?)
-        content << element.content
-      end
+      # # 1. add the editable elements
+      # self.editable_elements.each do |element|
+      #   # we don't want to include fixed editable elements of children.
+      #   next if !element.is_a?(Locomotive::EditableText) || (element.fixed? && element.from_parent?)
+      #   content << element.content
+      # end
 
-      # 2. add the raw template
+      # add the raw template by rendering it (will render the editable elements)
 
       # get a simple version of the template. not need to apply the "layout"
       # for instance.
