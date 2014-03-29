@@ -14,10 +14,10 @@ Gem::Specification.new do |s|
   s.description = "LocomotiveSearch is an engine which integrates ActiveSearch into LocomotiveCMS."
   s.license     = 'MIT'
 
-  s.files = Dir["{app,config,db,lib}/**/*", "vendor"] + ["MIT-LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib}/**/*", "vendor/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]
 
-  # s.add_dependency "locomotive_cms", ">= 2.5"
+  s.add_dependency "locomotive_cms", ">= 2.4"
   s.add_dependency "activesearch", "~> 0.3.0"
 
   s.add_development_dependency "rspec-rails"

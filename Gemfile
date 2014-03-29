@@ -6,7 +6,7 @@ gemspec
 # Declare your gem's dependencies in locomotive-search.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
-gem 'locomotive_cms', github: 'locomotivecms/engine'
+gem 'locomotive_cms', github: 'locomotivecms/engine' # FIXME: make the tests pass before LocomotiveCMS v2.5.x is out
 # gem 'activesearch', github: 'Papipo/activesearch'
 gem 'sass-rails'
 gem 'compass-rails'

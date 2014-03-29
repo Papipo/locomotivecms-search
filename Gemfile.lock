@@ -44,6 +44,7 @@ PATH
   specs:
     locomotivecms-search (0.3.0)
       activesearch (~> 0.3.0)
+      locomotive_cms (>= 2.4)
 
 GEM
   remote: http://rubygems.org/
