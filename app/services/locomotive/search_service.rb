@@ -5,6 +5,9 @@ module Locomotive
       # scope the search by the site
       conditions = { 'site_id' => site._id }
 
+      # locale agnostic
+      options[:locale] = false
+
       # launch the search with the current engine
       ::ActiveSearch.search(text, conditions, options).map do |entry|
         # keep only what we really need to display in the suggestions list
