@@ -6,7 +6,7 @@ module Locomotive
       conditions = { 'site_id' => site._id }
 
       # launch the search with the current engine
-      ::ActiveSearch.search(text, conditions, radius: 150).map do |entry|
+      ::ActiveSearch.search(text, conditions, options).map do |entry|
         # keep only what we really need to display in the suggestions list
         entry.slice('label', 'locale', 'search_type').tap do |_entry|
           _entry['path']         = entry_path(entry)

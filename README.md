@@ -12,6 +12,28 @@ Run `bundle install`
 
 ## Adding the search results page
 
+[New way]
+
+    {% search_for params.query, per_page: 10, page: params.page %}
+
+    <p>{{ search.total_entries }} elements found.</p>
+
+    <ul>
+    {% for result in search.results %}
+      <li><a href="/{{result.slug}}">{{ result.title }}</a></li>
+    {% endfor %}
+    </ul>
+
+    {% if search.total_pages > params.page %}
+      <p>
+        <a href="?page={{ params.page | plus: 1 }}&query={{ params.query }}">Next page</a>
+      </p>
+    {% endif %}
+
+    {% endsearch_for %}
+
+[Old way]
+
 Create a new page that will display your search results. Its code might be something like this:
 
     {% for result in site.search %}

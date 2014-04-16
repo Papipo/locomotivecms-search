@@ -7,7 +7,10 @@ Locomotive::ContentEntry.class_eval do
 
   def options_for_search
     store = [:search_type, :label, :_slug, :site_id, :content_type_slug]
-    content_type.entries_custom_fields.where(searchable: true).map(&:name) << { store: store }
+    content_type.entries_custom_fields.where(searchable: true).map(&:name) << {
+      store:  store,
+      locale: proc { ::Mongoid::Fields::I18n.locale }
+    }
   end
 
   def search_type
@@ -29,4 +32,13 @@ Locomotive::ContentEntry.class_eval do
       "#{content_type_slug}_#{id}"
     end
   end
+
+  alias_method :to_indexable_without_verbosity, :to_indexable
+
+  def to_indexable(depth = 0)
+    return self._label if depth > 0
+
+    to_indexable_without_verbosity(depth)
+  end
+
 end

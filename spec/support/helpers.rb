@@ -14,20 +14,36 @@ module SpecHelpers
 
   def setup_search
     @site = create('test site')
-    @ctype = build(:content_type, site: @site, name: "Examples")
-    @ctype.entries_custom_fields.build(label: "Name", type: "string", searchable: true)
-    @ctype.save!
-    @stuff_field = @ctype.entries_custom_fields.build(label: "Stuff", type: "text", searchable: false)
-    @stuff_field.save!
-    @ctype.entries.create!(name: "Findable entry", stuff: "Some stuff")
-    @ctype.entries.create!(name: "Hidden", stuff: "Not findable")
+
+    authors = build(:content_type, site: @site, name: "Authors")
+    authors.entries_custom_fields.build(label: "Fullname", type: "string", searchable: true)
+    authors.save!
+
+    examples = build(:content_type, site: @site, name: "Examples")
+    examples.entries_custom_fields.build(label: "Name", type: "string", searchable: true)
+    examples.entries_custom_fields.build(label: 'Author', type: 'belongs_to', class_name: authors.entries_class_name, searchable: true)
+    examples.entries_custom_fields.build(label: "Stuff", type: "text", searchable: false)
+    examples.save!
+
+    @ctype = examples
+
+    authors.entries_custom_fields.build(label: "Examples", type: "has_many", class_name: examples.entries_class_name, inverse_of: 'author', searchable: true)
+    authors.save!
+
+    author = authors.entries.create!(fullname: 'John Doe')
+    examples.entries.create!(name: "Findable entry", stuff: "Some stuff", author: author)
+    examples.entries.create!(name: "Hidden", stuff: "Not findable")
     create(:sub_page, site: @site, title: "Please search for this findable page", slug: "findable", raw_template: "This is what you were looking for", searchable: true)
     create(:sub_page, site: @site, title: "Unpublished findable", slug: "unpublished-findable", raw_template: "Not published, so can't be found", searchable: true, published: false)
     create(:sub_page, site: @site, title: "Seems findable", slug: "seems-findable", raw_template: "Even if it seems findable, it sound't be found because of the searchable flag", searchable: false)
     create(:sub_page, site: @site, title: "search", slug: "search", raw_template: <<-EOT
+      <html>
+      <body>
+      {% search_for params.search, page: params.page, per_page: 2 %}
+      * Total entries: {{ search.total_entries }}
       * Search results:
       <ul>
-        {% for result in site.search %}
+        {% for result in search.results %}
           {% if result.content_type_slug == 'examples' %}
             <li><a href="/examples/{{result._slug}}">{{ result.name }}</a></li>
           {% else %}
@@ -35,6 +51,9 @@ module SpecHelpers
           {% endif %}
         {% endfor %}
       </ul>
+      {% endsearch_for %}
+      </body>
+      </html>
     EOT
     )
 

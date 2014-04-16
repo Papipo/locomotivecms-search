@@ -8,7 +8,11 @@ Locomotive::Page.class_eval do
   field :searchable, type: Boolean, default: true
 
   ## behaviours ##
-  search_by [:title, :searchable_content, store: [:search_type, :label, :site_id, :fullpath]], if: :is_searchable?
+  search_by [
+    :title, :searchable_content,
+    store:  [:search_type, :label, :site_id, :fullpath],
+    locale: proc { ::Mongoid::Fields::I18n.locale }
+  ], if: :is_searchable?
 
   ## methods
 

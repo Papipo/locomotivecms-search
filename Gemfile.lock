@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/locomotivecms/engine.git
-  revision: 89566d497862034a73323bdccdd242c70057e470
+  revision: 5337f0929131ade2af245684464d91be33f3cbd4
   specs:
     locomotive_cms (2.5.0)
       RedCloth (~> 4.2.8)
@@ -43,9 +43,17 @@ GIT
 PATH
   remote: .
   specs:
-    locomotivecms-search (0.3.0)
-      activesearch (~> 0.3.0)
+    locomotivecms-search (0.3.2)
+      activesearch (~> 0.3.1)
       locomotive_cms (>= 2.4)
+
+PATH
+  remote: /Users/didier/Documents/LocomotiveCMS/gems/activesearch
+  specs:
+    activesearch (0.3.2)
+      actionpack
+      activesupport
+      sucker_punch
 
 GEM
   remote: http://rubygems.org/
@@ -77,10 +85,6 @@ GEM
     activeresource (3.2.17)
       activemodel (= 3.2.17)
       activesupport (= 3.2.17)
-    activesearch (0.3.0)
-      actionpack
-      activesupport
-      sucker_punch
     activesupport (3.2.17)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
@@ -97,7 +101,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-screenshot (0.3.17)
+    capybara-screenshot (0.3.19)
       capybara (>= 1.0, < 3)
       launchy
     capybara-webkit (1.1.0)
@@ -117,16 +121,16 @@ GEM
     celluloid (0.15.2)
       timers (~> 1.1.0)
     chunky_png (1.3.0)
-    codemirror-rails (3.22)
+    codemirror-rails (3.23)
       railties (>= 3.0, < 5)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    compass (0.12.4)
+    compass (0.12.5)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
-      sass (~> 3.2.17)
+      sass (~> 3.2.19)
     compass-rails (1.1.7)
       compass (>= 0.12.2)
       sprockets (<= 2.11.0)
@@ -144,7 +148,7 @@ GEM
     devise-encryptable (0.1.2)
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
-    dragonfly (1.0.3)
+    dragonfly (1.0.4)
       multi_json (~> 1.0)
       rack
     ejs (1.0.0)
@@ -219,7 +223,7 @@ GEM
     moped (1.5.2)
     multi_json (1.7.9)
     multi_xml (0.5.5)
-    net-scp (1.1.2)
+    net-scp (1.2.0)
       net-ssh (>= 2.6.5)
     net-ssh (2.8.0)
     nokogiri (1.5.11)
@@ -276,7 +280,7 @@ GEM
     ruby-hmac (0.4.0)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
-    sass (3.2.18)
+    sass (3.2.19)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -305,6 +309,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesearch!
   capybara-screenshot
   capybara-webkit
   compass-rails

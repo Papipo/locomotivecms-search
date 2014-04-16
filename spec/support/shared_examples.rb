@@ -30,6 +30,7 @@ shared_examples "a search backend" do
     visit 'http://test.example.com'
     fill_in "Search", with: "stuff"
     click_on "Search"
+    page.should have_content "Total entries: 1"
     page.should have_content "Findable entry"
   end
 end
