@@ -23,7 +23,14 @@ module Locomotive
           search_options  = { radius: 150 }.merge(options)
           conditions      = { 'site_id' => site_id }
 
-          ::ActiveSearch.search(text, conditions, search_options)
+          begin
+            ::ActiveSearch.search(text, conditions, search_options)
+          rescue Exception => exception
+            {
+              'error'   => true,
+              'message' => exception.message
+            }
+          end
         end
 
       end

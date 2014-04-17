@@ -17,7 +17,7 @@ gem "jquery-rails"
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 # gem 'locomotive_cms', path: '/Users/didier/Documents/LocomotiveCMS/engine'
-gem 'activesearch', path: '/Users/didier/Documents/LocomotiveCMS/gems/activesearch'
+# gem 'activesearch', path: '/Users/didier/Documents/LocomotiveCMS/gems/activesearch'
 
 # To use debugger
 # gem 'debugger'

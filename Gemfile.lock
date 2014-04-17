@@ -44,16 +44,8 @@ PATH
   remote: .
   specs:
     locomotivecms-search (0.3.2)
-      activesearch (~> 0.3.1)
+      activesearch (~> 0.3.2)
       locomotive_cms (>= 2.4)
-
-PATH
-  remote: /Users/didier/Documents/LocomotiveCMS/gems/activesearch
-  specs:
-    activesearch (0.3.2)
-      actionpack
-      activesupport
-      sucker_punch
 
 GEM
   remote: http://rubygems.org/
@@ -85,6 +77,10 @@ GEM
     activeresource (3.2.17)
       activemodel (= 3.2.17)
       activesupport (= 3.2.17)
+    activesearch (0.3.2)
+      actionpack
+      activesupport
+      sucker_punch
     activesupport (3.2.17)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
@@ -309,7 +305,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesearch!
   capybara-screenshot
   capybara-webkit
   compass-rails
