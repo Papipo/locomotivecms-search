@@ -10,8 +10,9 @@
     .inner
       .type {{search_type}}
       {{#with_locale}}
-      .locale
-        = flag_tag '{{locale}}'
+      .locale{ class: '{{locale}}' }
+        - current_site.locales.each do |locale|
+          = flag_tag locale
       {{/with_locale}}
       .locale
       %h5= link_to '{{label}}', '{{url}}'

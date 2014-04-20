@@ -108,6 +108,14 @@
         position: relative;
         top: -2px;
         margin-right: 2px;
+
+        .flag { display: none; }
+
+        <% Locomotive.config.locales.each do |locale| %>
+        &.<%= locale %> .flag-<%= locale %> {
+          display: inline;
+        }
+        <% end %>
       }
 
       .highlight {

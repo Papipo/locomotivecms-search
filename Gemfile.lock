@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/locomotivecms/engine.git
-  revision: 5337f0929131ade2af245684464d91be33f3cbd4
+  revision: daa498a016529284d749110a6d6bf1f5bf313121
   specs:
-    locomotive_cms (2.5.0)
+    locomotive_cms (2.5.0.rc1)
       RedCloth (~> 4.2.8)
       actionmailer-with-request (~> 0.4.0)
       cancan (= 1.6.7)
