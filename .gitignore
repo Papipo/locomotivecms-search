@@ -6,3 +6,5 @@ spec/dummy/log/*.log
 spec/dummy/tmp/
 spec/dummy/.sass-cache
 spec/dummy/config/backends.yml
+spec/wagon/log/*.log
+spec/wagon/.sass-cache

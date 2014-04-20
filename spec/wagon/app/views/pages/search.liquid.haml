@@ -1,0 +1,31 @@
+---
+title: Search testing page
+published: true
+---
+{% extends index %}
+
+{% block 'main' %}
+.row
+
+  {% search_for params.query, per_page: 10, page: params.page %}
+
+  %p {{ search.total_entries }} elements found.
+
+  %ul
+    {% for result in search.results %}
+    %li
+      {% if result.title %}
+      %a{ href: "/{{result.fullpath}}" } {{ result.title }}
+      {% else %}
+      %a{ href: "/projects/{{result._slug}}" } {{ result.label }}
+      {% endif %}
+    {% endfor %}
+
+  {% if search.total_pages > params.page %}
+  %p
+    %a{ href: "?page={{ params.page | plus: 1 }}&query={{ params.query }}" } Next page
+  {% endif %}
+
+  {% endsearch_for %}
+
+{% endblock %}
