@@ -43,7 +43,7 @@ GIT
 PATH
   remote: .
   specs:
-    locomotivecms-search (0.3.2)
+    locomotivecms-search (0.3.3)
       activesearch (~> 0.3.2)
 
 GEM
