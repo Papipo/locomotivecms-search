@@ -50,7 +50,7 @@ Locomotive::Page.class_eval do
       # get a simple version of the template. not need to apply the "layout"
       # for instance.
       # then, render this template
-      template = self.raw_template.sub(/\{\%\s*extends [^%]*\s*\%\}/, '')
+      template = self.raw_template.gsub(/\{\%\s*extends [^%]*\s*\%\}/, '')
 
       # modify the context instance so that the exceptions which might raise
       # won't be displayed in the rendered output.
