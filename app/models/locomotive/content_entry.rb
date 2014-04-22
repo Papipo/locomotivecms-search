@@ -38,7 +38,11 @@ Locomotive::ContentEntry.class_eval do
   def to_indexable(depth = 0)
     return self._label if depth > 0
 
-    to_indexable_without_verbosity(depth)
+    begin
+      to_indexable_without_verbosity(depth)
+    rescue Exception => e
+      Rails.logger.error "Unable to index #{content_type_slug}/#{self._label}[#{self._id}], error = #{e.message}"
+    end
   end
 
 end

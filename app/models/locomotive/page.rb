@@ -61,7 +61,11 @@ Locomotive::Page.class_eval do
       end
 
       # render the page
-      content << ::Liquid::Template.parse(template, {}).render(context)
+      begin
+        content << ::Liquid::Template.parse(template, {}).render(context)
+      rescue Exception => e
+        Rails.logger.error "Unable to index #{self.fullpath}[#{self._id}], error = #{e.message}"
+      end
     end.join("\n")
   end
 
