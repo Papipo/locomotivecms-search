@@ -14,7 +14,7 @@ Run `bundle install`
 
 [New way]
 
-    {% search_for params.query, per_page: 10, page: params.page %}
+    {% search_for params.search, per_page: 10, page: params.page %}
 
     <p>{{ search.total_entries }} elements found.</p>
 
@@ -36,7 +36,7 @@ Run `bundle install`
 
 Create a new page that will display your search results. Its code might be something like this:
 
-    {% for result in site.search %}
+    {% for result in site.search.results%}
       <li><a href="/{{result.slug}}">{{ result.title }}</a></li>
     {% endfor %}
 
