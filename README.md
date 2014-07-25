@@ -20,7 +20,7 @@ Run `bundle install`
 
     <ul>
     {% for result in search.results %}
-      <li><a href="/{{result.slug}}">{{ result.title }}</a></li>
+      <li><a href="/{{result._slug}}">{{ result.title }}</a></li>
     {% endfor %}
     </ul>
 
@@ -37,7 +37,7 @@ Run `bundle install`
 Create a new page that will display your search results. Its code might be something like this:
 
     {% for result in site.search.results%}
-      <li><a href="/{{result.slug}}">{{ result.title }}</a></li>
+      <li><a href="/{{result._slug}}">{{ result.title }}</a></li>
     {% endfor %}
 
 As you can see, when a search string is passed in the URL, you can fetch the results by using `site.search`.
