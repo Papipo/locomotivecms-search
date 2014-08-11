@@ -26,10 +26,12 @@ Locomotive::ContentEntry.class_eval do
   end
 
   def indexable_id
+    locale = ::Mongoid::Fields::I18n.locale
+
     if respond_to?(:site_id)
-      "site_#{site_id}_#{content_type_slug}_#{id}"
+      "site_#{site_id}_#{content_type_slug}_#{locale}_#{id}"
     else
-      "#{content_type_slug}_#{id}"
+      "#{content_type_slug}_#{locale}_#{id}"
     end
   end
 

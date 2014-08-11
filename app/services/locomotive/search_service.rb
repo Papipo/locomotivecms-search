@@ -44,11 +44,11 @@ module Locomotive
     end
 
     def page_path(id, locale)
-      Locomotive::Engine.routes.url_helpers.edit_page_path(id, locale: locale)
+      Locomotive::Engine.routes.url_helpers.edit_page_path(id, content_locale: locale)
     end
 
     def content_entry_path(content_type_slug, id, locale)
-      Locomotive::Engine.routes.url_helpers.edit_content_entry_path(content_type_slug, id, locale: locale)
+      Locomotive::Engine.routes.url_helpers.edit_content_entry_path(content_type_slug, id, content_locale: locale)
     end
 
   end
