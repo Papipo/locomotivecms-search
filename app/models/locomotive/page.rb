@@ -39,17 +39,16 @@ Locomotive::Page.class_eval do
   def searchable_content
     [].tap do |content|
       # # 1. add the editable elements
-      # self.editable_elements.each do |element|
-      #   # we don't want to include fixed editable elements of children.
-      #   next if !element.is_a?(Locomotive::EditableText) || (element.fixed? && element.from_parent?)
-      #   content << element.content
-      # end
+      self.editable_elements.each do |element|
+        # we don't want to include fixed editable elements of children.
+        next if !element.is_a?(Locomotive::EditableText) || (element.fixed? && element.from_parent?)
+        content << element.content
+      end
 
       # add the raw template by rendering it (will render the editable elements)
 
       # get a simple version of the template. not need to apply the "layout"
-      # for instance.
-      # then, render this template
+      # for instance. then, render this template
       template = self.raw_template.gsub(/\{\%\s*extends [^%]*\s*\%\}/, '')
 
       # modify the context instance so that the exceptions which might raise
@@ -62,11 +61,28 @@ Locomotive::Page.class_eval do
 
       # render the page
       begin
-        content << ::Liquid::Template.parse(template, {}).render(context)
+        document = ::Liquid::Template.parse(template, {})
+
+        # remove all the editable_(file|text|control) elements
+        remove_editable_elements_from_searchable_template(document.root)
+
+        content << document.render(context)
       rescue Exception => e
         Rails.logger.error "Unable to index #{self.fullpath}[#{self._id}], error = #{e.message}"
       end
     end.join("\n")
+  end
+
+  def remove_editable_elements_from_searchable_template(node)
+    if node.respond_to?(:nodelist)
+      (node.nodelist || []).each do |child|
+        if child.is_a?(Locomotive::Liquid::Tags::Editable::Base)
+          node.nodelist.delete(child)
+        else
+          self.remove_editable_elements_from_searchable_template(child)
+        end
+      end
+    end
   end
 
 end
