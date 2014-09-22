@@ -8,10 +8,10 @@ gemspec
 # development dependencies will be added by default to the :development group.
 # gem 'locomotive_cms', github: 'locomotivecms/engine' # FIXME: make the tests pass before LocomotiveCMS v2.5.x is out
 # gem 'activesearch', github: 'Papipo/activesearch'
-gem 'locomotive_cms', '~> 2.5.5'
-gem 'sass-rails'
-gem 'compass-rails'
-gem "jquery-rails"
+# gem 'locomotive_cms', '~> 2.5.5'
+# gem 'sass-rails'
+# gem 'compass-rails'
+# gem "jquery-rails"
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or

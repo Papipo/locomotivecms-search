@@ -1,1 +1,0 @@
-Dir[Locomotive::Search::Engine.root.join("lib/locomotive/search/concerns/**/*.rb")].each {|f| require f}
