@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    locomotivecms-search-wagon (0.3.5)
+    locomotivecms-search-wagon (0.3.6)
 
 GEM
   remote: http://rubygems.org/
