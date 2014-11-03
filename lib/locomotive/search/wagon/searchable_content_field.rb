@@ -9,9 +9,8 @@ module Locomotive::Search::SearchableContentField
     alias :to_params :to_params_with_search
   end
 
-
   def to_params_with_search
-    to_params_without_search.tap { |h| puts h.inspect }.merge({
+    to_params_without_search.merge({
       searchable: self.searchable
     })
   end
