@@ -3,7 +3,7 @@ require_dependency Locomotive::Engine.root.join('app', 'models', 'locomotive', '
 Locomotive::ContentEntry.class_eval do
   include Locomotive::Search::Extension
 
-  search_by :options_for_search
+  search_by :options_for_search, if: :is_searchable?
 
   def options_for_search
     store = [:search_type, :label, :_slug, :site_id, :content_type_slug]
@@ -33,6 +33,10 @@ Locomotive::ContentEntry.class_eval do
     else
       "#{content_type_slug}_#{locale}_#{id}"
     end
+  end
+
+  def is_searchable?
+    self.content_type.searchable?
   end
 
   alias_method :to_indexable_without_verbosity, :to_indexable

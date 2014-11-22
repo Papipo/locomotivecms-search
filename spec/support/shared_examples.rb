@@ -19,6 +19,13 @@ shared_examples "a search backend" do
     page.should_not have_content "Page not found"
   end
 
+  it "tells the content type is searchable if at least one of its fields is searchable" do
+    @ctype.searchable?.should eq true
+    @ctype.entries_custom_fields.all.each { |f| f.searchable = false }
+    @ctype.save
+    @ctype.searchable?.should eq false
+  end
+
   it "that is able to index modified content types" do
     @ctype.entries_custom_fields.last.searchable = true
     @ctype.save
