@@ -1,5 +1,5 @@
 PATH
-  remote: ../../.
+  remote: ../..
   specs:
     locomotivecms-search (0.3.2)
       activesearch (~> 0.3.2)
@@ -102,7 +102,7 @@ GEM
       thin (~> 1.5.1)
       thor
       will_paginate (~> 3.0.3)
-    logger (1.2.8)
+    logger (1.5.1)
     mime-types (1.25.1)
     multi_json (1.7.9)
     multi_xml (0.5.5)
@@ -137,7 +137,7 @@ GEM
     thor (0.19.1)
     tilt (1.4.1)
     timers (1.1.0)
-    tzinfo (0.3.39)
+    tzinfo (0.3.61)
     wdm (0.1.0)
     will_paginate (3.0.5)
     zip (2.0.2)
