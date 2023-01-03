@@ -1,5 +1,5 @@
 PATH
-  remote: ../../.
+  remote: ../..
   specs:
     locomotivecms-search (0.3.2)
       activesearch (~> 0.3.2)
@@ -51,11 +51,11 @@ GEM
     httmultiparty (0.3.10)
       httparty (>= 0.7.3)
       multipart-post
-    httparty (0.13.1)
-      json (~> 1.8)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
     i18n (0.6.9)
-    json (1.8.1)
+    json (1.8.6)
     less (2.2.2)
       commonjs (~> 0.2.6)
     libv8 (3.16.14.3)
@@ -102,10 +102,11 @@ GEM
       thin (~> 1.5.1)
       thor
       will_paginate (~> 3.0.3)
-    logger (1.2.8)
+    logger (1.5.3)
     mime-types (1.25.1)
+    mini_mime (1.1.2)
     multi_json (1.7.9)
-    multi_xml (0.5.5)
+    multi_xml (0.6.0)
     multipart-post (2.0.0)
     rack (1.5.2)
     rack-cache (1.2)
